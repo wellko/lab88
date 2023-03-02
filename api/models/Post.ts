@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, {Types} from "mongoose";
+import User from "./User";
 
 const Schema = mongoose.Schema;
 const PostSchema = new Schema({
@@ -11,7 +12,21 @@ const PostSchema = new Schema({
     },
     image: {
         type: String,
-    }
+    },
+    user:
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+            validate: {
+                validator: async (value: Types.ObjectId) => User.findById(value),
+                message: 'User not founded!',
+            }
+        },
+    datetime: {
+        type: Number,
+        required: true,
+    },
 });
 
 const Post = mongoose.model('Post', PostSchema);

@@ -3,6 +3,8 @@ import express from 'express';
 import cors = require("cors");
 import config from "./config";
 import postsRouter from "./routers/posts";
+import commentsRouter from "./routers/comments";
+import usersRouter from "./routers/users";
 
 
 const app = express();
@@ -11,6 +13,8 @@ app.use(cors());
 const port = 8000;
 app.use(express.json());
 app.use('/posts', postsRouter);
+app.use('/comments', commentsRouter);
+app.use('/users', usersRouter);
 
 const run = async () => {
     mongoose.set('strictQuery', false);
