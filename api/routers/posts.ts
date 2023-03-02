@@ -16,6 +16,15 @@ postsRouter.get('/', async (req, res) => {
     }
 });
 
+postsRouter.get('/:id', async (req, res) => {
+    try {
+        const posts = await Post.find({_id: req.params.id}).populate('user', 'username')
+        return res.send(posts);
+    } catch {
+        return res.sendStatus(500);
+    }
+});
+
 postsRouter.post('/', imagesUpload.single('image'), auth, async (req,res, next) => {
     const user = (req as RequestWithUser).user;
     const newPostData: PostData = {

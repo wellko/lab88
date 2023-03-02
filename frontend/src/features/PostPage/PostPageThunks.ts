@@ -4,11 +4,15 @@ import axiosApi from "../../axios-api";
 import {RootState} from "../../app/store";
 
 
-export const getPosts = createAsyncThunk<Post[]>(
+export const getPosts = createAsyncThunk<Post[], string | undefined>(
     'Posts/getAll',
-    async () => {
+    async (arg) => {
+        let url = '/posts'
+        if (arg){
+            url = url + '/' + arg;
+        }
         try{
-            const response = await axiosApi.get('/posts');
+            const response = await axiosApi.get(url);
             return response.data
         } catch (e) {
             return  e;
