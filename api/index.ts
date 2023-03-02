@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import express from 'express';
 import cors = require("cors");
 import config from "./config";
+import postsRouter from "./routers/posts";
 
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.static('public'));
 app.use(cors());
 const port = 8000;
 app.use(express.json());
+app.use('/posts', postsRouter);
 
 const run = async () => {
     mongoose.set('strictQuery', false);

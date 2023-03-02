@@ -3,3 +3,9 @@ export interface IUser {
     password: string;
     token: string;
 }
+
+export interface PostData {
+   title: string;
+   description: string;
+   image: string | null;
+}
