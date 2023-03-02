@@ -9,7 +9,7 @@ const postsRouter = express.Router();
 
 postsRouter.get('/', async (req, res) => {
     try {
-        const posts = await Post.find()
+        const posts = await Post.find().sort({'datetime': -1})
         return res.send(posts);
     } catch {
         return res.sendStatus(500);
