@@ -33,7 +33,7 @@ commentsRouter.get('/', async (req, res) => {
         findParams = {post: queryPost};
     }
     try {
-        const comment = await Comment.find(findParams).sort({'datetime': -1});
+        const comment = await Comment.find(findParams).populate('user', 'username').sort({'datetime': -1});
         return res.send(comment);
     } catch {
         return res.sendStatus(500);

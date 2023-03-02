@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from 'redux-persist/es/constants';
 import {UsersReducer} from "../features/Users/UsersSlice";
 import {PostsPageReducer} from "../features/PostPage/PostPageSlice";
+import {CommentsPageReducer} from "../features/Comments/CommentsSlice";
 
 const usersPersistConfig = {
     key: 'peddit:Users',
@@ -13,6 +14,7 @@ const usersPersistConfig = {
 
 const rootReducer = combineReducers({
     posts: PostsPageReducer,
+    comments: CommentsPageReducer,
     users: persistReducer(usersPersistConfig, UsersReducer),
 });
 

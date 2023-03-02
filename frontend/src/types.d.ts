@@ -51,3 +51,23 @@ export interface PostData {
     image: string | null;
     description: string;
 }
+
+export interface CommentItem {
+    user: string;
+    description: string;
+    post: string;
+    datetime: string;
+}
+
+export interface CommentData {
+    description: string;
+    post: string;
+}
+
+export interface PopulatedComment {
+    user: {
+        username: string
+    };
+    description: string;
+    datetime: string;
+}

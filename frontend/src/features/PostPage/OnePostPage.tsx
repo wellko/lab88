@@ -11,23 +11,32 @@ import {getPosts} from "./PostPageThunks";
 import {useParams} from "react-router-dom";
 import dayjs from "dayjs";
 import {apiUrl} from "../../constants";
+import CommentForm from "../../components/UI/CommentsForm/CommentsForm";
+import {getComments} from "../Comments/CommentsThunks";
+import {selectStateOfComments} from "../Comments/CommentsSlice";
+import CommentBlock from "../../components/CommentBlock";
 
 const OnePostPage = () => {
     const {id} = useParams();
     const dispatch = useAppDispatch();
     const posts = useAppSelector(selectStateOfPosts);
+    const comments = useAppSelector(selectStateOfComments);
     const loading = useAppSelector(selectStatusOfPosts);
     const post = posts[0];
 
     const callBack = useCallback(async () => {
         await dispatch(getPosts(id!));
-    }, [dispatch])
+        await dispatch(getComments());
+    }, [dispatch, id])
 
     useEffect(() => {
         void callBack();
     }, [callBack])
 
-    const ImgUrl = apiUrl + post.image;
+    let ImgUrl = 'blah'
+    if (post.image) {
+        ImgUrl = apiUrl + post.image;
+    }
 
     return (
         <Container fixed>
@@ -40,7 +49,7 @@ const OnePostPage = () => {
                                 <img
                                     height="200"
                                     src={ImgUrl}
-                                    alt="photo of post"
+                                    alt="post"
                                 /></Grid>
                             <Grid item xs={8}>
                                 <Typography gutterBottom variant="h5" component="div" textAlign='center'>
@@ -57,6 +66,8 @@ const OnePostPage = () => {
                         </Grid>
                     </Grid>}
             </Grid>
+            <CommentForm id={id!}/>
+            {comments.map(el => <CommentBlock key={Math.random()} comment={el}/>)}
         </Container>
     );
 };
