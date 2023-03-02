@@ -4,7 +4,7 @@ import { isAxiosError } from 'axios';
 import axiosApi from "../../axios-api";
 
 export const register = createAsyncThunk<User, RegisterMutation, {rejectValue: ValidationError}>(
-    'users/register',
+    'Users/register',
     async (registerMutation, {rejectWithValue}) => {
         try {
             const response = await axiosApi.post<RegisterResponse>('/users', registerMutation);
@@ -19,7 +19,7 @@ export const register = createAsyncThunk<User, RegisterMutation, {rejectValue: V
 );
 
 export const login = createAsyncThunk<User, LoginMutation, {rejectValue: GlobalError}>(
-    'users/login',
+    'Users/login',
     async (loginMutation, {rejectWithValue}) => {
         try {
             const response = await axiosApi.post<RegisterResponse>('/users/sessions', loginMutation);

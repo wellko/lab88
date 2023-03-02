@@ -34,3 +34,11 @@ export interface LoginMutation {
 export interface GlobalError {
     error: string;
 }
+
+export interface Post {
+    title:string;
+    _id: string;
+    description: string;
+    image: string;
+    datetime: string;
+}

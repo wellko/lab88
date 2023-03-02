@@ -2,15 +2,17 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from 'redux-persist/es/constants';
-import {UsersReducer} from "../features/users/UsersSlice";
+import {UsersReducer} from "../features/Users/UsersSlice";
+import {PostsPageReducer} from "../features/PostPage/PostPageSlice";
 
 const usersPersistConfig = {
-    key: 'peddit:users',
+    key: 'peddit:Users',
     storage,
     whitelist: ['user'],
 };
 
 const rootReducer = combineReducers({
+    posts: PostsPageReducer,
     users: persistReducer(usersPersistConfig, UsersReducer),
 });
 
