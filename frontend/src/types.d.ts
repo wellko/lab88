@@ -39,6 +39,15 @@ export interface Post {
     title:string;
     _id: string;
     description: string;
-    image: string;
+    image: string ;
     datetime: string;
+    user: {
+        username: string;
+    };
+}
+
+export interface PostData {
+    title: string;
+    image: string | null;
+    description: string;
 }

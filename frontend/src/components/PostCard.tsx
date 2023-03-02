@@ -29,11 +29,8 @@ const ArtistCard:React.FC<state> = ({post}) => {
                     <Typography gutterBottom variant="h5" component="div">
                         {post.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {post.description}
-                    </Typography>
                     <Typography variant="body2" color="text.secondary" marginLeft='auto'>
-                        created at : {dayjs(post.datetime).format('YYYY.MM.DD HH:mm:ss')}
+                        created at : {dayjs(post.datetime).format('YYYY.MM.DD HH:mm:ss')} by: {post.user.username}
                     </Typography>
                 </CardContent>
             </CardActionArea>
