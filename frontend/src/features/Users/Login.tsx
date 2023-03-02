@@ -53,7 +53,7 @@ const Login = () => {
                     <LockOpenIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign In
+                    Log in
                 </Typography>
                 {error && (
                     <Alert
