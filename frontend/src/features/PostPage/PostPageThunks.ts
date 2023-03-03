@@ -8,23 +8,23 @@ export const getPosts = createAsyncThunk<Post[], string | undefined>(
     'Posts/getAll',
     async (arg) => {
         let url = '/posts'
-        if (arg){
+        if (arg) {
             url = url + '/' + arg;
         }
-        try{
+        try {
             const response = await axiosApi.get(url);
             return response.data
         } catch (e) {
-            return  e;
+            return e;
         }
     }
 )
 
-export const newPost = createAsyncThunk<void, PostData,{state:RootState}>(
+export const newPost = createAsyncThunk<void, PostData, { state: RootState }>(
     'Posts/newPost',
     async (arg, {getState}) => {
         const user = getState().users.user;
-        if (user){
+        if (user) {
             const formData = new FormData();
             formData.append('title', arg.title);
             formData.append('description', arg.description);
@@ -32,10 +32,10 @@ export const newPost = createAsyncThunk<void, PostData,{state:RootState}>(
                 formData.append('image', arg.image);
             }
             try {
-                const response = await axiosApi.post('/posts', formData,{headers: {'Authorization': user.token}});
+                const response = await axiosApi.post('/posts', formData, {headers: {'Authorization': user.token}});
                 return response.data
             } catch (e) {
-                return  e;
+                return e;
             }
         }
     }

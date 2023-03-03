@@ -40,7 +40,7 @@ const OnePostPage = () => {
     return (
         <Container>
             {loading && <CircularProgress/>}
-                {post && <Container fixed>
+            {post && <Container fixed>
                 <Typography textAlign='center' variant='h3'>Post:</Typography>
                 <Grid container gap={2}>
                     <Grid item xs={10}>
@@ -66,7 +66,7 @@ const OnePostPage = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Container>}{user &&  <CommentForm id={id!}/>}
+            </Container>}{user && <CommentForm id={id!}/>}
             {loadingComments ? <CircularProgress/> :
                 comments.map(el => <CommentBlock key={Math.random()} comment={el}/>)
             }

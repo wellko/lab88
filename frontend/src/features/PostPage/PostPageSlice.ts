@@ -23,7 +23,7 @@ export const PostsPageSlice = createSlice({
         builder.addCase(getPosts.pending, (state) => {
             state.loading = true;
         })
-        builder.addCase(getPosts.fulfilled, (state,action) => {
+        builder.addCase(getPosts.fulfilled, (state, action) => {
             state.posts = action.payload;
             state.loading = false;
         })

@@ -15,14 +15,14 @@ const PostPage = () => {
     }, [dispatch])
 
     useEffect(() => {
-       void callBack();
+        void callBack();
     }, [callBack])
 
     return (
         <Container fixed>
             <Typography textAlign='center' variant='h3'>Posts:</Typography>
             <Grid container gap={2}>
-                {loading? <CircularProgress/>:
+                {loading ? <CircularProgress/> :
                     posts.map(el => <PostCard key={Math.random()} post={el}/>)}
             </Grid>
         </Container>

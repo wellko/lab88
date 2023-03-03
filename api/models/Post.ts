@@ -11,7 +11,7 @@ const PostSchema = new Schema({
     description: {
         type: String,
         validate: {
-            validator: function (this: HydratedDocument<PostData>){
+            validator: function (this: HydratedDocument<PostData>) {
                 return Boolean(this.image || this.description);
             },
             message: 'at least one of description or image field must be fielded',
@@ -19,12 +19,12 @@ const PostSchema = new Schema({
     },
     image: {
         type: String,
-            validate: {
-                validator: function (this: HydratedDocument<PostData>) {
-                   return Boolean(this.image || this.description)
-                },
-                message: 'at least one of description or image field must be fielded',
-            }
+        validate: {
+            validator: function (this: HydratedDocument<PostData>) {
+                return Boolean(this.image || this.description)
+            },
+            message: 'at least one of description or image field must be fielded',
+        }
     },
     user:
         {

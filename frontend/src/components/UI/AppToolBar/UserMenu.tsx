@@ -35,11 +35,11 @@ const UserMenu: React.FC<Props> = ({user}) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={  () => {
+                <MenuItem onClick={() => {
                     navigate('/newPost');
                 }}>create new post</MenuItem>
-                <MenuItem onClick={ async () => {
-                  await  dispatch(logoutApi());
+                <MenuItem onClick={async () => {
+                    await dispatch(logoutApi());
                     navigate('/');
                 }}>Log Out</MenuItem>
             </Menu>

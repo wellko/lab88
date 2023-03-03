@@ -10,7 +10,7 @@ interface state {
     post: Post,
 }
 
-const ArtistCard:React.FC<state> = ({post}) => {
+const ArtistCard: React.FC<state> = ({post}) => {
     let ImgUrl = dialogue;
 
     if (post.image) {
@@ -23,7 +23,7 @@ const ArtistCard:React.FC<state> = ({post}) => {
     };
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{maxWidth: 345}}>
             <CardActionArea onClick={onClickNavigate}>
                 <CardMedia
                     component="img"

@@ -29,7 +29,7 @@ const CommentSchema = new Schema({
     },
     datetime: {
         type: Number,
-        required: true,
+        required: true
     }
 });
 

@@ -4,11 +4,11 @@ import Comment from "../models/Comment";
 import {Error} from "mongoose";
 import {CommentData} from "../types";
 
-const  commentsRouter = express.Router();
+const commentsRouter = express.Router();
 
-commentsRouter.post('/',auth , async (req, res, next)=>{
+commentsRouter.post('/', auth, async (req, res, next) => {
     const user = (req as RequestWithUser).user;
-    const newComment: CommentData ={
+    const newComment: CommentData = {
         user: user._id,
         post: req.body.post,
         description: req.body.description,
@@ -23,7 +23,8 @@ commentsRouter.post('/',auth , async (req, res, next)=>{
             return res.status(400).send(error);
         }
         return next(error);
-    }});
+    }
+});
 
 
 commentsRouter.get('/', async (req, res) => {

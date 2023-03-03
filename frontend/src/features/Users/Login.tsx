@@ -90,7 +90,7 @@ const Login = () => {
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
                     >
-                        {loading? <CircularProgress/>: 'Sign In'}
+                        {loading ? <CircularProgress/> : 'Sign In'}
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>

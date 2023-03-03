@@ -1,8 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import { PopulatedComment} from "../../types";
+import {PopulatedComment} from "../../types";
 import {getComments, newComments} from "./CommentsThunks";
-
 
 interface Initial {
     comments: PopulatedComment[];
@@ -24,7 +23,7 @@ export const CommentsPageSlice = createSlice({
         builder.addCase(getComments.pending, (state) => {
             state.loading = true;
         })
-        builder.addCase(getComments.fulfilled, (state,action) => {
+        builder.addCase(getComments.fulfilled, (state, action) => {
             state.comments = action.payload;
             state.loading = false;
         })

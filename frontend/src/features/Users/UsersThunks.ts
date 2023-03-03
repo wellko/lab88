@@ -1,13 +1,12 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GlobalError, LoginMutation, RegisterMutation, RegisterResponse, User, ValidationError } from '../../types';
-import { isAxiosError } from 'axios';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {GlobalError, LoginMutation, RegisterMutation, RegisterResponse, User, ValidationError} from '../../types';
+import {isAxiosError} from 'axios';
 import axiosApi from "../../axios-api";
 import {RootState} from "../../app/store";
 import {logOut} from "./UsersSlice";
 
 
-
-export const register = createAsyncThunk<User, RegisterMutation, {rejectValue: ValidationError}>(
+export const register = createAsyncThunk<User, RegisterMutation, { rejectValue: ValidationError }>(
     'Users/register',
     async (registerMutation, {rejectWithValue}) => {
         try {
@@ -22,7 +21,7 @@ export const register = createAsyncThunk<User, RegisterMutation, {rejectValue: V
     }
 );
 
-export const login = createAsyncThunk<User, LoginMutation, {rejectValue: GlobalError}>(
+export const login = createAsyncThunk<User, LoginMutation, { rejectValue: GlobalError }>(
     'Users/login',
     async (loginMutation, {rejectWithValue}) => {
         try {
@@ -37,7 +36,7 @@ export const login = createAsyncThunk<User, LoginMutation, {rejectValue: GlobalE
     }
 );
 
-export const logoutApi = createAsyncThunk<void, void, {state: RootState}>(
+export const logoutApi = createAsyncThunk<void, void, { state: RootState }>(
     'users/logout',
     async (_, {getState, dispatch}) => {
         const token = getState().users.user?.token;

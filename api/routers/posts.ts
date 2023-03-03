@@ -25,11 +25,11 @@ postsRouter.get('/:id', async (req, res) => {
     }
 });
 
-postsRouter.post('/', imagesUpload.single('image'), auth, async (req,res, next) => {
+postsRouter.post('/', imagesUpload.single('image'), auth, async (req, res, next) => {
     const user = (req as RequestWithUser).user;
     const newPostData: PostData = {
         title: req.body.title,
-        description: req.body.description? req.body.description: '',
+        description: req.body.description ? req.body.description : '',
         image: req.file ? req.file.filename : null,
         user: user._id,
         datetime: Date.now(),
@@ -43,6 +43,7 @@ postsRouter.post('/', imagesUpload.single('image'), auth, async (req,res, next) 
             return res.status(400).send(error);
         }
         return next(error);
-    }});
+    }
+});
 
-export default  postsRouter;
+export default postsRouter;

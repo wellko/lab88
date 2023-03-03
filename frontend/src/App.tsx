@@ -8,7 +8,6 @@ import AppToolbar from "./components/UI/AppToolBar/AppToolBar";
 import PostForm from "./features/PostPage/PostForm";
 import OnePostPage from "./features/PostPage/OnePostPage";
 
-
 function App() {
     return (
         <>

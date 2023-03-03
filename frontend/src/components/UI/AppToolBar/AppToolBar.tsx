@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppBar, Grid, styled, Toolbar, Typography } from '@mui/material';
-import { Link as NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../../app/hooks';
+import {AppBar, Grid, styled, Toolbar, Typography} from '@mui/material';
+import {Link as NavLink} from 'react-router-dom';
+import {useAppSelector} from '../../../app/hooks';
 import UserMenu from './UserMenu';
 import AnonymousMenu from './AnonymousMenu';
 import {selectUser} from "../../../features/Users/UsersSlice";
@@ -27,7 +27,7 @@ const AppToolbar = () => {
                     <Grid item>
                         {user ? (
                             <UserMenu user={user}/>
-                        ): (
+                        ) : (
                             <AnonymousMenu/>
                         )}
                     </Grid>

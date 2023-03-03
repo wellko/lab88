@@ -22,11 +22,11 @@ const NewsForm = () => {
     const [required, setRequired] = useState(false);
 
     useEffect(() => {
-        if (post.image){
+        if (post.image) {
             setRequired(false);
-        }else if(post.description.length > 0){
+        } else if (post.description.length > 0) {
             setRequired(false);
-        }else {
+        } else {
             setRequired(true);
         }
     }, [post.image, post.description, setRequired])
@@ -59,7 +59,8 @@ const NewsForm = () => {
                     <TextField name='title' required fullWidth label="Title: " id="fullWidth" onChange={onChange}
                                value={post.title}
                                margin='normal'/>
-                    <TextField name='description' required={required} fullWidth label="Message: " id="fullWidth" onChange={onChange}
+                    <TextField name='description' required={required} fullWidth label="Message: " id="fullWidth"
+                               onChange={onChange}
                                value={post.description}
                                margin='normal'/>
                     <FileInput
@@ -69,7 +70,8 @@ const NewsForm = () => {
                         onChange={fileInputChangeHandler}
                     />
                     <Box textAlign='center'>
-                        <LoadingButton sx={{padding:'10px 40px'}} loading={posting} type='submit' variant='contained'>Post</LoadingButton>
+                        <LoadingButton sx={{padding: '10px 40px'}} loading={posting} type='submit'
+                                       variant='contained'>Post</LoadingButton>
                     </Box>
 
                 </form>

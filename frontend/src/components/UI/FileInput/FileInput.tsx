@@ -8,7 +8,7 @@ interface Props {
     required: boolean;
 }
 
-const FileInput: React.FC<Props> = ({onChange, name, label,required}) => {
+const FileInput: React.FC<Props> = ({onChange, name, label, required}) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [filename, setFilename] = useState('');
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
