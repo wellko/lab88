@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {User} from '../../../types';
-import {Button, Menu, MenuItem} from '@mui/material';
-import {useAppDispatch} from "../../../app/hooks";
+import {Button, CircularProgress, Menu, MenuItem} from '@mui/material';
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {useNavigate} from "react-router-dom";
 import {logoutApi} from "../../../features/Users/UsersThunks";
+import {selectLogOut} from "../../../features/Users/UsersSlice";
 
 interface Props {
     user: User;
@@ -12,6 +13,7 @@ interface Props {
 const UserMenu: React.FC<Props> = ({user}) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const logOut = useAppSelector(selectLogOut);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -38,10 +40,10 @@ const UserMenu: React.FC<Props> = ({user}) => {
                 <MenuItem onClick={() => {
                     navigate('/newPost');
                 }}>create new post</MenuItem>
-                <MenuItem onClick={async () => {
+                <MenuItem disabled={logOut} onClick={async () => {
                     await dispatch(logoutApi());
                     navigate('/');
-                }}>Log Out</MenuItem>
+                }}>{logOut? <CircularProgress color="success" />:  'LogOut'}</MenuItem>
             </Menu>
         </>
     );
