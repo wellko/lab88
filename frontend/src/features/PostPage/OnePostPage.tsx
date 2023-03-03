@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import {apiUrl} from "../../constants";
 import CommentForm from "../../components/UI/CommentsForm/CommentsForm";
 import {getComments} from "../Comments/CommentsThunks";
-import {selectStateOfComments, selectStatusOfPostingComments} from "../Comments/CommentsSlice";
+import {selectStateOfComments, selectStatusOfComments} from "../Comments/CommentsSlice";
 import CommentBlock from "../../components/CommentBlock";
 import dialogue from '../../assets/dialogue.png';
 import {selectUser} from "../Users/UsersSlice";
@@ -20,7 +20,7 @@ const OnePostPage = () => {
     const posts = useAppSelector(selectStateOfPosts);
     const comments = useAppSelector(selectStateOfComments);
     const loading = useAppSelector(selectStatusOfPosts);
-    const loadingComments = useAppSelector(selectStatusOfPostingComments);
+    const loadingComments = useAppSelector(selectStatusOfComments);
     const post = posts[0];
 
     useEffect(() => {
