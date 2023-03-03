@@ -1,10 +1,5 @@
-import React, {useCallback, useEffect} from 'react';
-import {
-    CircularProgress,
-    Container,
-    Grid,
-    Typography
-} from "@mui/material";
+import React, {useEffect} from 'react';
+import {CircularProgress, Container, Grid, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {selectStateOfPosts, selectStatusOfPosts} from "./PostPageSlice";
 import {getPosts} from "./PostPageThunks";
@@ -13,36 +8,41 @@ import dayjs from "dayjs";
 import {apiUrl} from "../../constants";
 import CommentForm from "../../components/UI/CommentsForm/CommentsForm";
 import {getComments} from "../Comments/CommentsThunks";
-import {selectStateOfComments} from "../Comments/CommentsSlice";
+import {selectStateOfComments, selectStatusOfPostingComments} from "../Comments/CommentsSlice";
 import CommentBlock from "../../components/CommentBlock";
+import dialogue from '../../assets/dialogue.png';
+import {selectUser} from "../Users/UsersSlice";
 
 const OnePostPage = () => {
     const {id} = useParams();
     const dispatch = useAppDispatch();
+    const user = useAppSelector(selectUser);
     const posts = useAppSelector(selectStateOfPosts);
     const comments = useAppSelector(selectStateOfComments);
     const loading = useAppSelector(selectStatusOfPosts);
+    const loadingComments = useAppSelector(selectStatusOfPostingComments);
     const post = posts[0];
 
-    const callBack = useCallback(async () => {
-        await dispatch(getPosts(id!));
-        await dispatch(getComments());
+    useEffect(() => {
+        dispatch(getPosts(id!));
     }, [dispatch, id])
 
     useEffect(() => {
-        void callBack();
-    }, [callBack])
+        dispatch(getComments(id!));
+    }, [dispatch, id])
 
-    let ImgUrl = 'blah'
-    if (post.image) {
+    let ImgUrl = dialogue;
+
+    if (post && post.image) {
         ImgUrl = apiUrl + post.image;
     }
 
     return (
-        <Container fixed>
-            <Typography textAlign='center' variant='h3'>Post:</Typography>
-            <Grid container gap={2}>
-                {loading ? <CircularProgress/> :
+        <Container>
+            {loading && <CircularProgress/>}
+                {post && <Container fixed>
+                <Typography textAlign='center' variant='h3'>Post:</Typography>
+                <Grid container gap={2}>
                     <Grid item xs={10}>
                         <Grid container>
                             <Grid item xs={4}>
@@ -64,12 +64,13 @@ const OnePostPage = () => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                    </Grid>}
-            </Grid>
-            <CommentForm id={id!}/>
-            {comments.map(el => <CommentBlock key={Math.random()} comment={el}/>)}
-        </Container>
-    );
+                    </Grid>
+                </Grid>
+            </Container>}{user &&  <CommentForm id={id!}/>}
+            {loadingComments ? <CircularProgress/> :
+                comments.map(el => <CommentBlock key={Math.random()} comment={el}/>)
+            }
+        </Container>);
 };
 
 export default OnePostPage;

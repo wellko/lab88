@@ -4,13 +4,19 @@ import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@mui/mat
 import {apiUrl} from "../constants";
 import {useNavigate} from "react-router-dom";
 import dayjs from "dayjs";
+import dialogue from "../assets/dialogue.png";
 
 interface state {
     post: Post,
 }
 
 const ArtistCard:React.FC<state> = ({post}) => {
-    const ImgUrl = apiUrl + post.image;
+    let ImgUrl = dialogue;
+
+    if (post.image) {
+        ImgUrl = apiUrl + post.image;
+    }
+
     const navigate = useNavigate();
     const onClickNavigate = () => {
         navigate('/posts/' + post._id)

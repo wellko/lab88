@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {Box, Container, TextField} from "@mui/material";
 import FileInput from "../../components/UI/FileInput/FileInput";
@@ -18,7 +18,18 @@ const NewsForm = () => {
         image: null,
         description: '',
     }
-    const [post, setPost] = useState<PostData>(initialState)
+    const [post, setPost] = useState<PostData>(initialState);
+    const [required, setRequired] = useState(false);
+
+    useEffect(() => {
+        if (post.image){
+            setRequired(false);
+        }else if(post.description.length > 0){
+            setRequired(false);
+        }else {
+            setRequired(true);
+        }
+    }, [post.image, post.description, setRequired])
 
     const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, files} = e.target;
@@ -43,17 +54,18 @@ const NewsForm = () => {
 
     return (
         <Container>
-            <Box border={2} borderRadius={2} borderColor='#000' sx={{bgcolor: '#FFF'}} marginBottom={3}>
+            <Box border={2} borderRadius={2} borderColor='secondary.main' sx={{bgcolor: '#FFF'}} marginBottom={3}>
                 <form onSubmit={postData}>
                     <TextField name='title' required fullWidth label="Title: " id="fullWidth" onChange={onChange}
                                value={post.title}
                                margin='normal'/>
-                    <TextField name='description' required fullWidth label="Message: " id="fullWidth" onChange={onChange}
+                    <TextField name='description' required={required} fullWidth label="Message: " id="fullWidth" onChange={onChange}
                                value={post.description}
                                margin='normal'/>
                     <FileInput
                         label="Image"
                         name="image"
+                        required={required}
                         onChange={fileInputChangeHandler}
                     />
                     <Box textAlign='center'>

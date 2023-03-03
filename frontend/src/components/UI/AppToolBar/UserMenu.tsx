@@ -3,7 +3,6 @@ import {User} from '../../../types';
 import {Button, Menu, MenuItem} from '@mui/material';
 import {useAppDispatch} from "../../../app/hooks";
 import {useNavigate} from "react-router-dom";
-import {logOut} from "../../../features/Users/UsersSlice";
 import {logoutApi} from "../../../features/Users/UsersThunks";
 
 interface Props {
@@ -40,7 +39,6 @@ const UserMenu: React.FC<Props> = ({user}) => {
                     navigate('/newPost');
                 }}>create new post</MenuItem>
                 <MenuItem onClick={ async () => {
-                  await  dispatch(logOut());
                   await  dispatch(logoutApi());
                     navigate('/');
                 }}>Log Out</MenuItem>

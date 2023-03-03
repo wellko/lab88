@@ -1,21 +1,19 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosApi from "../../axios-api";
-import {CommentData, CommentItem, PopulatedComment} from "../../types";
+import {CommentData, PopulatedComment} from "../../types";
 import {RootState} from "../../app/store";
 
-export const getComments = createAsyncThunk<PopulatedComment[], void, { state: RootState }>(
+export const getComments = createAsyncThunk<PopulatedComment[], string>(
     'Comments/getAll',
-    async (_, {getState}) => {
-        const user = getState().users.user;
-        if (user) {
+    async (arg) => {
             try {
-                const response = await axiosApi.get('/comments/', {headers: {'Authorization': user.token}});
+                const response = await axiosApi.get('/comments?post=' + arg );
                 return response.data;
             } catch(e)
                 {
                     return e;
                 }
-            }
+
         })
 
 export const newComments = createAsyncThunk<void, CommentData, { state: RootState }>(

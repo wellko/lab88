@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../models/User";
-import { Error } from 'mongoose';
+import {Error} from 'mongoose';
 
 const usersRouter = express.Router();
 
@@ -42,18 +42,13 @@ usersRouter.delete('/sessions', async (req, res, next) => {
         if (!token) return res.send(success);
         const user = await User.findOne({token});
         if (!user) return res.send(success);
-        user.token = '';
-        user.save();
+        user.generateToken();
+        await user.save();
         return res.send(success);
     } catch (e) {
         return next(e);
     }
 });
-
-
-
-
-
 
 
 export default usersRouter;

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Box, Container, TextField} from "@mui/material";
+import {Box, Container, TextField, Typography} from "@mui/material";
 import {LoadingButton} from "@mui/lab";
 import {CommentData} from "../../../types";
-import {newComments} from "../../../features/Comments/CommentsThunks";
+import {getComments, newComments} from "../../../features/Comments/CommentsThunks";
 import {selectStatusOfPostingComments} from "../../../features/Comments/CommentsSlice";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 
@@ -29,17 +29,21 @@ const CommentForm: React.FC<props> = ({id}) => {
         e.preventDefault();
         await dispatch(newComments(comment));
         setComment(initialState);
+        await dispatch(getComments(id));
     }
 
     return (
         <Container>
-            <Box border={2} borderRadius={2} borderColor='#000' sx={{bgcolor: '#FFF'}} marginBottom={3}>
+            <Box border={2} borderRadius={2} borderColor='secondary.main' sx={{bgcolor: '#FFF'}} marginBottom={3}>
+                <Typography variant='h4' textAlign='center'>Comment</Typography>
                 <form onSubmit={postData}>
-                    <TextField name='description' required fullWidth label="Message: " id="fullWidth" onChange={onChange}
+                    <TextField name='description' required fullWidth label="Message: " id="fullWidth"
+                               onChange={onChange}
                                value={comment.description}
                                margin='normal'/>
                     <Box textAlign='center'>
-                        <LoadingButton sx={{padding:'10px 40px'}} loading={posting} type='submit' variant='contained'>Post</LoadingButton>
+                        <LoadingButton sx={{padding: '10px 40px'}} loading={posting} type='submit'
+                                       variant='contained'>Post</LoadingButton>
                     </Box>
                 </form>
             </Box>
